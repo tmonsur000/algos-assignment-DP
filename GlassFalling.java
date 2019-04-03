@@ -32,8 +32,8 @@ public class GlassFalling {
     //checking the table for answer before the call
     //if theres an answer, return the answer
     
-            if(memo[floors][sheets]!=0){
-                      return memoIZE[floors][sheets]
+            if(memoIZE[floors][sheets]!=0){
+                      return memoIZE[floors][sheets];
                 }
     
     //base case if the floors are 0th or 1st floor
@@ -53,7 +53,7 @@ public class GlassFalling {
               int worstCase;
     
               for(int i=1; i<=floors; i++){
-                      worstCase=Math.max(glassFallingMemoized(i-1, sheets-1, memoIZE)//for when glass sheet breaks
+                      worstCase=Math.max(glassFallingMemoized(i-1, sheets-1, memoIZE),//for when glass sheet breaks
                                          glassFallingMemoized(floors-i, sheets, memoIZE);//for when glass sheet doesn't break
   
                       if(worstCase<ansWER)
@@ -84,8 +84,8 @@ public class GlassFalling {
             
             int trIAL;
             for(int m=1; m<l; m++){
-                trIAL=1+Math.max[glassBottom[k-1][m-1], 
-                                 glassBottom[k][l-m];
+                trIAL=1+Math.max(glassBottom[k-1][m-1], 
+                                 glassBottom[k][l-m]);
                                  glassBottom[k][l]=Math.min(trIAL, glassBottom[k][l]);
                              }
                        }
