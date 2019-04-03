@@ -1,18 +1,51 @@
 /**
  * Rod cutting problem described in Chapter 15 of textbook
+ *Author: Tayeba Monsur
  */
 public class RodCutting {
 
   // Do not change the parameters!
   public int rodCuttingRecur(int rodLength, int[] lengthPrices) {
-    return 0;
+          
+          //create an index array with rod length
+          int[] memoIZE= new int[rodLength+1];
+    
+          for(int i=0; i<memoIZE.length; i++){
+              memoIZE[i]=-1;
+             }
+           //call the memoized method for rodcutting
+           return rodCuttingMemoized(rodLength, lengthPrices, memoIZE);
+      }
+          
+  public int rodCuttingMemoized(int rodLength, int[] lengthPrices, int[] meMO){
+    
+        int maxIMUM=Integer.MIN_VALUE;
+        
+        if(meMO[rodLength]!=0)
+            return meMO[rodLength];
+        if(rodLength<=0)
+            return 0;
+        else{
+            for(int i=0; i<rodLength; i++){
+                  maxIMUM=Math.max(maxIMUM, lengthPrices[i]+rodCuttingMemoized(rodLength-i-1, lengthPrices, meMO));
+            }
+        }
+      meMO[rodLength]=maxIMUM;
+      return maxIMUM;
   }
-
+    
+    
   // Do not change the parameters!
   public int rodCuttingBottomUp(int rodLength, int[] lengthPrices) {
-    return 0;
-  }
-
+        int[] rodCuttingBottom= new int[rodLength+1];
+        rodCuttingBottom[0]=0;
+        for(int j=1; j<i;j++){
+          maxIMUM=Math.max(maxIMUM, lengthPrices[j]+rodCuttingBottom[i-(j+1)]);
+          rodCuttingBottom[i]=maxIMUM;
+        }
+      }
+    return rodCuttingBottom[rodLength];
+}
 
   public static void main(String args[]){
       RodCutting rc = new RodCutting();
