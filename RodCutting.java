@@ -4,9 +4,16 @@
  */
 public class RodCutting {
 
+  public int maxIMUM(int a, int b){
+      if(a>b) return a;
+      return b;
+  }
   // Do not change the parameters!
   public int rodCuttingRecur(int rodLength, int[] lengthPrices) {
           
+           if(rodLength<=0){
+              return 0;
+           }
           //create an index array with rod length
           int[] memoIZE= new int[rodLength+1];
     
@@ -39,10 +46,13 @@ public class RodCutting {
   public int rodCuttingBottomUp(int rodLength, int[] lengthPrices) {
         int[] rodCuttingBottom= new int[rodLength+1];
         rodCuttingBottom[0]=0;
-        for(int j=1; j<i;j++){
-          maxIMUM=Math.max(maxIMUM, lengthPrices[j]+rodCuttingBottom[i-(j+1)]);
+        for(int j=1; j<rodLength;j++){
+            int maxIMUM=-1;
+          for (int i=1; i<j; i++){
+            
+          maxIMUM=Math.max(maxIMUM, lengthPrices[j]+rodCuttingBottom[j-i-1]);
+          }
           rodCuttingBottom[i]=maxIMUM;
-        }
       }
     return rodCuttingBottom[rodLength];
 }
