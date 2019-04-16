@@ -4,56 +4,36 @@
  */
 public class RodCutting {
 
-  public int maxIMUM(int a, int b){
-      if(a>b) return a;
-      return b;
-  }
   // Do not change the parameters!
   public int rodCuttingRecur(int rodLength, int[] lengthPrices) {
           
            if(rodLength<=0){
               return 0;
            }
-          //create an index array with rod length
-          int[] memoIZE= new int[rodLength+1];
+
+	  int maxIMUM=Integer.MIN_VALUE;
     
-          for(int i=0; i<memoIZE.length; i++){
-              memoIZE[i]=-1;
+          for(int i=0; i<rodLength; i++){
+             
+		maxIMUM=Math.max(maxIMUM,lengthPrices[i] + rodCuttingRecur(rodLength-i-1,lengthPrices));
              }
-           //call the memoized method for rodcutting
-           return rodCuttingMemoized(rodLength, lengthPrices, memoIZE);
+          return maxIMUM;
       }
-          
-  public int rodCuttingMemoized(int rodLength, int[] lengthPrices, int[] meMO){
-    
-        int maxIMUM=Integer.MIN_VALUE;
-        
-        if(meMO[rodLength]!=0)
-            return meMO[rodLength];
-        if(rodLength<=0)
-            return 0;
-        else{
-            for(int i=0; i<rodLength; i++){
-                  maxIMUM=Math.max(maxIMUM, lengthPrices[i]+rodCuttingMemoized(rodLength-i-1, lengthPrices, meMO));
-            }
-        }
-      meMO[rodLength]=maxIMUM;
-      return maxIMUM;
-  }
-    
+              
     
   // Do not change the parameters!
   public int rodCuttingBottomUp(int rodLength, int[] lengthPrices) {
-        int[] rodCuttingBottom= new int[rodLength+1];
+        int rodCuttingBottom[]= new int[rodLength+1];
         rodCuttingBottom[0]=0;
-        for(int j=1; j<rodLength;j++){
-            int maxIMUM=-1;
-          for (int i=1; i<j; i++){
-            
-          maxIMUM=Math.max(maxIMUM, lengthPrices[j]+rodCuttingBottom[j-i-1]);
-          }
-          rodCuttingBottom[j]=maxIMUM;
-      }
+
+        for(int j=1; j<=rodLength;j++){
+            int maxIMUM=Integer.MIN_VALUE;
+        
+	  	for (int k=0; k<j; k++){
+                  maxIMUM=Math.max(maxIMUM, lengthPrices[k]+rodCuttingBottom[j-k-1]);
+                  rodCuttingBottom[j]=maxIMUM;
+           }
+	}
     return rodCuttingBottom[rodLength];
 }
 
