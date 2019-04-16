@@ -54,7 +54,7 @@ public class GlassFalling {
     
               for(int i=1; i<=floors; i++){
                       worstCase=Math.max(glassFallingMemoized(i-1, sheets-1, memoIZE),//for when glass sheet breaks
-                                         glassFallingMemoized(floors-i, sheets, memoIZE);//for when glass sheet doesn't break
+                                         glassFallingMemoized(floors-i, sheets, memoIZE));//for when glass sheet doesn't break
   
                       if(worstCase<ansWER)
                                 ansWER=worstCase;
