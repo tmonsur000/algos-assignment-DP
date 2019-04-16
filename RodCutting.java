@@ -52,7 +52,7 @@ public class RodCutting {
             
           maxIMUM=Math.max(maxIMUM, lengthPrices[j]+rodCuttingBottom[j-i-1]);
           }
-          rodCuttingBottom[i]=maxIMUM;
+          rodCuttingBottom[j]=maxIMUM;
       }
     return rodCuttingBottom[rodLength];
 }
